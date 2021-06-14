@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Covid-19</title>
+
+	<!-- link para Css -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- link para Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+	<!-- script de Fontawesome -->
+	<script src="https://kit.fontawesome.com/d2c6472ad0.js" crossorigin="anonymous"></script>
+	<!-- script del jquery -->
+	<script src="jquery-3.6.0.min.js"></script>
+
+	<!-- Recursos para usar Mapbox -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+
+	<!-- script del Chart -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+	
+	<!-- Carta de Info de Covid-19 -->
+	<div class="card card-top" style="width: 100%;">
+		<!-- Imagen -->
+		<img src="img/covidimage2.png" class="card-img-top">
+		<div class="card-body">
+			<!-- Texto -->
+			<p class="card-text card-covid-top">El coronavirus SARS-Cov-2 es un virus que apareció en China. Después se extendió a todos los continentes del mundo provocando una pandemia. Actualmente Europa y América son los más afectados. Este nuevo virus, provoca la enfermedad conocida con el nombre de COVID-19.</p>
+		</div>
+	</div>
+
+	<!-- Casos totales de Covid-19 -->
+	<div class="casos-covid">
+		<!-- Primer grupo de botones -->
+		<div class="d-grid gap-2 button-casos">
+			<!-- Boton de casos confirmados -->
+			<button class="btn btn-danger btn-confirmados" type="button" style="cursor: default;"></button>
+			<!-- Boton de casos negativos -->
+			<button class="btn btn-primary btn-negativos" type="button" style="cursor: default;"></button>
+		</div>
+
+		<!-- Segundo grupo de botones -->
+		<div class="d-grid gap-2 button-casos">
+			<!-- Boton de casos sospechosos -->
+			<button class="btn btn-warning btn-sospechosos" type="button" style="cursor: default;"></button>
+			<!-- Boton de casos de defuncion -->
+			<button class="btn btn-dark btn-defunciones" type="button" style="cursor: default;"></button>
+		</div>
+
+		<!-- Tercer grupo de botones -->
+		<div class="d-grid gap-2 button-casos">
+			<!-- Boton de casos recuperados -->
+			<button class="btn btn-success btn-recuperados" type="button" style="font-size: 1.2rem; cursor: default;"></button>
+		</div>
+	</div>
+
+	<!-- Div del Mapa de Casos de Covid-19 -->
+	<div class="map-grafica">
+		<div class="div-map">
+			<!-- Titulo -->
+			<h2>
+				<i class="fas fa-viruses"></i>
+				Semaforo Covid-19 México
+				<i class="fas fa-head-side-mask"></i>
+			</h2>
+
+			<!-- Mapa de Casos de Covid-19 -->
+			<div id='map' style='width: 700px; height: 400px;'></div>
+
+			<!-- Colores -->
+			<!-- >> Titulo Colores -->
+			<h4>
+				<i class="fas fa-traffic-light"></i>
+				Colores del semaforo Covid-19
+			</h4>
+
+			<!-- >> Colores -->
+			<h5>
+				<i class="fas fa-circle circulo-verde"></i> Verde <i class="fas fa-circle circulo-amarillo"></i> Amarrillo 
+				<i class="fas fa-circle circulo-naranja"></i> Naranja <i class="fas fa-circle circulo-rojo"></i> Rojo
+			</h5>
+		</div>
+
+		<div class="info-semaforo">
+			<div style="height: 23%;"></div>
+
+			<h2>
+				<i class="fas fa-hands-wash"></i> 
+				Si te cuidas tú, nos cuidamos todos...
+			</h2>
+
+			<p>
+				Todos podemos hacer algo para mitigar y contener la expansión de las enfermedades. Lo primero siempre es entender qué son, cómo se transmiten y cómo afectan. <br>
+				En este caso, se trata del coronavirus SARS-COV2. Apareció en China en diciembre pasado y provoca una enfermedad llamada COVID-19, que se ha extendido por el mundo y fue declarada pandemia global por la Organización Mundial de la Salud.
+			</p>
+		</div>
+	</div>
+
+	<!-- Div de la Grafica de Covid-19 -->
+	<div class="div-grafica">
+		<canvas id="miGrafica" height="100"></canvas>
+	</div>
+
+	<!-- Div de la info sobre Covid-19 -->
+	<div class="info">
+		<!-- Titulo -->
+		<h2>
+			<i class="fas fa-exclamation-triangle"></i>
+			 ¿Cuándo debo acudir a recibir atención médica? 
+			<i class="fas fa-exclamation-triangle"></i>
+		</h2>
+		<!-- Subtitulo 1 -->
+		<h5>Una persona debe sospechar de COVID-19 cuando presenta al menos dos de los siguientes síntomas:</h5>
+
+		<!-- Div de los simtomas -->
+		<div class="sintomas">
+			<!-- Sintoma 1 -->
+			<div>
+				<p>
+					<i class="fas fa-head-side-cough"></i>
+					Tos/Estornudos
+				</p>
+			</div>
+
+			<!-- Sintoma 2 -->
+			<div>
+				<p>
+					<i class="fas fa-thermometer-full"></i>
+					Fiebre
+				</p>
+			</div>
+
+			<!-- Sintoma 3 -->
+			<div>
+				<p>
+					<i class="fas fa-head-side-virus"></i>
+					Dolor de cabeza
+				</p>
+			</div>
+		</div>
+
+		<!-- Subtitulo 2 -->
+		<h5>Y que se acompaña de alguno de los siguientes:</h5>
+		<!-- Div de los acompañamientos de los simtomas -->
+		<div class="sintomas-secundarios">
+			<!-- Acompañamiento 1 -->
+			<div>
+				<p>
+					<i class="fas fa-lungs-virus"></i> <br>
+					Dificultad para respirar (casos más graves)
+				</p>
+			</div>
+
+			<!-- Acompañamiento 2 -->
+			<div>
+				<p>
+					<i class="fas fa-frown-open"></i> <br>
+					Dolor de garganta
+				</p>
+			</div>
+
+			<!-- Acompañamiento 3 -->
+			<div>
+				<p>
+					<i class="fas fa-box-tissue"></i> <br>
+					Escurrimiento nasal
+				</p>
+			</div>
+
+			<!-- Acompañamiento 4 -->
+			<div>
+				<p>
+					<i class="fas fa-eye"></i> <br>
+					Ojos rojos
+				</p>
+			</div>
+
+			<!-- Acompañamiento 5 -->
+			<div>
+				<p>
+					<i class="fas fa-child"></i> <br>
+					Dolores en músculos o articulaciones
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS -->
+	<!-- Script Botones y la Grafica -->
+	<script>
+		$.getJSON('LATEST.json', function(covid) {
+
+			//Extraer la informacion del boton de Infectados
+			var sacarDataInfectados = '<i class="fas fa-plus-circle" style="padding-right: 1rem;"></i> Confirmados ' + covid.infected + ' pacientes';
+
+			$(".btn-confirmados").html(sacarDataInfectados);
+
+			//Extraer la informacion del boton de los casos Negativos
+			var sacarDataNegativos = '<i class="fas fa-minus-circle" style="padding-right: 1rem;"></i> Negativos ' + covid.negative + ' pacientes';
+
+			$(".btn-negativos").html(sacarDataNegativos);
+
+			//Extraer la informacion del boton de los casos Sospechosos
+			var sacarDataSospechosos = '<i class="fas fa-question-circle" style="padding-right: 1rem;"></i> Sospechosos ' + covid.suspected + ' pacientes';
+
+			$(".btn-sospechosos").html(sacarDataSospechosos);
+
+			//Extraer la informacion del boton de los casos Fallecidos
+			var sacarDataFallecidos = '<i class="fas fa-skull-crossbones" style="padding-right: 1rem;"></i> Defunciones ' + covid.deceased + ' pacientes';
+
+			$(".btn-defunciones").html(sacarDataFallecidos);
+
+			//Extraer la informacion del boton de los casos Recuperados
+			var sacarDataRecuperados = '<i class="fas fa-walking" style="padding-right: 1rem;"></i> Pacientes Recuperados ' + covid.recovered;
+
+			$(".btn-recuperados").html(sacarDataRecuperados);
+
+			// Codigo de la grafica
+			let miCanvas = document.getElementById("miGrafica").getContext("2d");
+
+			var chart = new Chart(miCanvas, {
+				type: "bar",
+				data: {
+					labels: ["Ciudad de Mexico", "Baja California Sur", "Tabasco", "Sonora", "Coahuila", "Yucatan", "San Luis Potosi", "Tamaulipas", "Nuevo Leon", "Quintana Roo", "Colima", "Guanajuato", "Sinaloa", "Campeche", "Baja California", "Tlaxcala", "Guerrero", "Aguascalientes", "Durango", "Puebla", "Zacatecas", "Nayarit", "Michoacan", "Oaxaca", "Hidalgo", "Queretaro", "Veracruz", "Jalisco", "Chihuahua", "Morelos", "Chiapas"],
+					datasets: [
+					{
+						label: "Casos Covid-19 por Estados",
+						backgroundColor: "rgb(0,0,0,0.8)",
+						data: [covid.State['Ciudad de Mexico'].infected, covid.State['Baja California Sur'].infected, covid.State.Tabasco.infected, covid.State.Sonora.infected, covid.State.Coahuila.infected, covid.State.Yucatan.infected, covid.State['San Luis Potosi'].infected, covid.State.Tamaulipas.infected, covid.State['Nuevo Leon'].infected, covid.State['Quintana Roo'].infected, covid.State.Colima.infected, covid.State.Guanajuato.infected, covid.State.Sinaloa.infected, covid.State.Campeche.infected, covid.State['Baja California'].infected, covid.State.Tlaxcala.infected, covid.State.Guerrero.infected, covid.State.Aguascalientes.infected, covid.State.Durango.infected, covid.State.Puebla.infected, covid.State.Zacatecas.infected, covid.State.Nayarit.infected, covid.State.Michoacan.infected, covid.State.Oaxaca.infected, covid.State.Hidalgo.infected, covid.State.Queretaro.infected, covid.State.Veracruz.infected, covid.State.Jalisco.infected, covid.State.Chihuahua.infected, covid.State.Morelos.infected, covid.State.Chiapas.infected]
+					}
+					]
+				}
+			});
+		});
+	</script>
+
+	<!-- Script Mapa -->
+	<script>
+		//Token
+		mapboxgl.accessToken = 'pk.eyJ1IjoiZ2lvdmFubml2aWN0b3JpbyIsImEiOiJja3B1cmEwY3AxYTA4Mm9xdjc0ZG5vZWNqIn0.Hgq81k4HIaF3j_Q_lv8JRQ';
+
+		//Mapa
+		var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/light-v10',
+			center:[-102.552788,23.634501],
+			zoom:3.9
+		});
+
+		//Puntos en el Mapa
+
+		//Estado de Mexico
+		let element = document.createElement('div');
+		element.className = 'marker-red';
+		new mapboxgl.Marker(element).setLngLat({
+			lng: -99.139337,
+			lat: 19.405151
+		}).addTo(map);
+
+		//Baja California Sur
+		let element2 = document.createElement('div');
+		element2.className = 'marker-yellow';
+		new mapboxgl.Marker(element2).setLngLat({
+			lng: -111.876776,
+			lat: 25.953929
+		}).addTo(map);
+
+		//Tabasco
+		let element3 = document.createElement('div');
+		element3.className = 'marker-orange';
+		new mapboxgl.Marker(element3).setLngLat({
+			lng: -92.618927,
+			lat: 17.840918
+		}).addTo(map);
+
+		//Sonora
+		let element4 = document.createElement('div');
+		element4.className = 'marker-orange';
+		new mapboxgl.Marker(element4).setLngLat({
+			lng: -110.452988,
+			lat: 29.706079
+		}).addTo(map);
+
+		//Coahuila
+		let element5 = document.createElement('div');
+		element5.className = 'marker-orange';
+		new mapboxgl.Marker(element5).setLngLat({
+			lng: -101.945915,
+			lat: 28.321172
+		}).addTo(map);
+
+		//Yucatan
+		let element6 = document.createElement('div');
+		element6.className = 'marker-yellow';
+		new mapboxgl.Marker(element6).setLngLat({
+			lng: -89.054506,
+			lat: 20.837422
+		}).addTo(map);
+
+		//San Luis Potosi
+		let element7 = document.createElement('div');
+		element7.className = 'marker-orange';
+		new mapboxgl.Marker(element7).setLngLat({
+			lng: -100.765053,
+			lat: 22.745227
+		}).addTo(map);
+
+		//Tamaulipas
+		let element8 = document.createElement('div');
+		element8.className = 'marker-orange';
+		new mapboxgl.Marker(element8).setLngLat({
+			lng: -98.311762,
+			lat: 24.678634
+		}).addTo(map);
+
+		//Nuevo Leon
+		let element9 = document.createElement('div');
+		element9.className = 'marker-red';
+		new mapboxgl.Marker(element9).setLngLat({
+			lng: -99.472535,
+			lat: 25.664909
+		}).addTo(map);
+
+		//Quintana Roo
+		let element10 = document.createElement('div');
+		element10.className = 'marker-yellow';
+		new mapboxgl.Marker(element10).setLngLat({
+			lng: -88.279764,
+			lat: 19.346279
+		}).addTo(map);
+
+		//Colima
+		let element11 = document.createElement('div');
+		element11.className = 'marker-green';
+		new mapboxgl.Marker(element11).setLngLat({
+			lng: -103.619584,
+			lat: 19.113165
+		}).addTo(map);
+
+		//Guanajuato
+		let element12 = document.createElement('div');
+		element12.className = 'marker-red';
+		new mapboxgl.Marker(element12).setLngLat({
+			lng: -101.170306,
+			lat: 20.943486
+		}).addTo(map);
+
+		//Sinaloa
+		let element13 = document.createElement('div');
+		element13.className = 'marker-yellow';
+		new mapboxgl.Marker(element13).setLngLat({
+			lng: -107.524835,
+			lat: 24.894466
+		}).addTo(map);
+
+		//Campeche
+		let element14 = document.createElement('div');
+		element14.className = 'marker-green';
+		new mapboxgl.Marker(element14).setLngLat({
+			lng: -90.163703,
+			lat: 18.988838
+		}).addTo(map);
+
+		//Baja California
+		let element15 = document.createElement('div');
+		element15.className = 'marker-orange';
+		new mapboxgl.Marker(element15).setLngLat({
+			lng: -115.528217,
+			lat: 30.751803
+		}).addTo(map);
+
+		//Tlaxcala
+		let element16 = document.createElement('div');
+		element16.className = 'marker-yellow';
+		new mapboxgl.Marker(element16).setLngLat({
+			lng: -98.247945,
+			lat: 19.397811
+		}).addTo(map);
+
+		//Guerrero
+		let element17 = document.createElement('div');
+		element17.className = 'marker-orange';
+		new mapboxgl.Marker(element17).setLngLat({
+			lng: -99.908225,
+			lat: 17.579450
+		}).addTo(map);
+
+		//Aguascalientes
+		let element18 = document.createElement('div');
+		element18.className = 'marker-yellow';
+		new mapboxgl.Marker(element18).setLngLat({
+			lng: -102.347618,
+			lat: 21.970501
+		}).addTo(map);
+
+		//Durango
+		let element19 = document.createElement('div');
+		element19.className = 'marker-yellow';
+		new mapboxgl.Marker(element19).setLngLat({
+			lng: -104.672055,
+			lat: 24.283134
+		}).addTo(map);
+
+		//Puebla
+		let element20 = document.createElement('div');
+		element20.className = 'marker-orange';
+		new mapboxgl.Marker(element20).setLngLat({
+			lng: -98.092556,
+			lat: 18.928517
+		}).addTo(map);
+
+		//Zacatecas
+		let element21 = document.createElement('div');
+		element21.className = 'marker-yellow';
+		new mapboxgl.Marker(element21).setLngLat({
+			lng: -102.571941,
+			lat: 22.761831
+		}).addTo(map);
+
+		//Nayarit
+		let element22 = document.createElement('div');
+		element22.className = 'marker-green';
+		new mapboxgl.Marker(element22).setLngLat({
+			lng: -104.886326,
+			lat: 21.789257
+		}).addTo(map);
+
+		//Michoacan
+		let element23 = document.createElement('div');
+		element23.className = 'marker-yellow';
+		new mapboxgl.Marker(element23).setLngLat({
+			lng: -101.707701,
+			lat: 19.131906
+		}).addTo(map);
+
+		//Oaxaca
+		let element24 = document.createElement('div');
+		element24.className = 'marker-yellow';
+		new mapboxgl.Marker(element24).setLngLat({
+			lng: -96.381768,
+			lat: 17.057367
+		}).addTo(map);
+
+		//Hidalgo
+		let element25 = document.createElement('div');
+		element25.className = 'marker-yellow';
+		new mapboxgl.Marker(element25).setLngLat({
+			lng: -99.021906,
+			lat: 20.397841
+		}).addTo(map);
+
+		//Queretaro
+		let element26 = document.createElement('div');
+		element26.className = 'marker-yellow';
+		new mapboxgl.Marker(element26).setLngLat({
+			lng: -99.981180,
+			lat: 20.751834
+		}).addTo(map);
+
+		//Veracruz
+		let element27 = document.createElement('div');
+		element27.className = 'marker-red';
+		new mapboxgl.Marker(element27).setLngLat({
+			lng: -96.281134,
+			lat: 19.078848
+		}).addTo(map);
+
+		//Jalisco
+		let element28 = document.createElement('div');
+		element28.className = 'marker-orange';
+		new mapboxgl.Marker(element28).setLngLat({
+			lng: -103.769264,
+			lat: 20.278515
+		}).addTo(map);
+
+		//Chihuahua
+		let element29 = document.createElement('div');
+		element29.className = 'marker-yellow';
+		new mapboxgl.Marker(element29).setLngLat({
+			lng: -106.002687,
+			lat: 28.442935
+		}).addTo(map);
+
+		//Morelos
+		let element30 = document.createElement('div');
+		element30.className = 'marker-green';
+		new mapboxgl.Marker(element30).setLngLat({
+			lng: -99.119113,
+			lat: 18.755078
+		}).addTo(map);
+
+		//Chiapas
+		let element31 = document.createElement('div');
+		element31.className = 'marker-yellow';
+		new mapboxgl.Marker(element31).setLngLat({
+			lng: -92.282285,
+			lat: 16.355575
+		}).addTo(map);
+	</script>
+</body>
+</html>

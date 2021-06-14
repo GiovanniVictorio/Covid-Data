@@ -1,0 +1,124 @@
+body {
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+}
+
+.marker-green {
+	background-image: url('img/mapbox-green.png');
+	background-size: cover;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.marker-yellow {
+	background-image: url('img/mapbox-yellow.png');
+	background-size: cover;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.marker-orange {
+	background-image: url('img/mapbox-orange.png');
+	background-size: cover;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.marker-red {
+	background-image: url('img/mapbox-red.png');
+	background-size: cover;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.card-covid-top { 
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.casos-covid {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	display: flex;
+	width: 100%;
+}
+.button-casos { 
+	width: 33%;
+	padding: 0.5%;
+}
+
+.map-grafica {
+	display: flex;
+	width: 100%;
+	text-align: center;
+	padding: 1rem;
+}
+.div-map { width: 49%; }
+.div-map h2  i { color: green; }
+.div-map h4 { padding-top: 0.5rem; }
+.div-map h4 i { color: #FFBD00; }
+
+.div-grafica { 
+	width: 100%;
+}
+
+.info-semaforo { text-align: center; }
+.info-semaforo p { 
+	font-size: 1.3rem;
+	margin-left: 20px;
+}
+
+.circulo-verde { color: green; }
+.circulo-amarillo { color: yellow; }
+.circulo-naranja { color: orange; }
+.circulo-rojo { color: red; }
+
+.info {
+	width: 100%;
+	text-align: center;
+	padding: 2rem;
+}
+.info h2 { color: #737373; }
+.info h2 i { color: #E60000; }
+.info h5 { color: #565656; }
+.sintomas { 
+	width: 100%;
+	display: flex;
+	text-align: center;
+	padding: 1rem;
+}
+.sintomas div {
+	padding: 1rem;
+	text-align: center;
+	width: 33%;
+}
+.sintomas div p {
+	font-size: 30px;
+	color: #565656;
+}
+.sintomas-secundarios { 
+	width: 100%;
+	display: flex;
+	text-align: center;
+	padding: 1rem;
+}
+.sintomas-secundarios div {
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	text-align: center;
+	width: 20%;
+}
+.sintomas-secundarios div p i { font-size: 40px; }
+.sintomas-secundarios div p {
+	font-size: 25px;
+	color: #565656;
+}
